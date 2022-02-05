@@ -1,0 +1,40 @@
+from snakemake.utils import min_version
+
+min_version("6.12")
+
+configfile: "config/config.yaml"
+
+import pandas as pd
+
+SAMPLES = (
+    pd.read_csv(config["samples"], dtype={"sample_name": str})
+    .set_index("sample_name", drop=False)
+    .sort_index()
+    .sample_name
+)
+
+include: "rules/fastqc.smk"
+include: "rules/cutadapt.smk"
+include: "rules/trim.smk"
+include: "rules/rm_rRNA.smk"
+include: "rules/hisat2.smk"
+include: "rules/macs2.smk"
+include: "rules/homer.smk"
+
+# 设定需要保存的结果
+rule all:
+    input:
+        expand("results/fastqc/{sample}-{G}_R1_fastqc.html", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/fastqc/{sample}-{G}_R2_fastqc.html", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/cleanData/{sample}-{G}_cleanData.fastq.1.gz", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/cleanData/{sample}-{G}_cleanData.fastq.2.gz", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/hisat2/{sample}-{G}.bam", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/hisat2/{sample}-{G}.sorted.bam", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/hisat2/{sample}-{G}.sorted.bam.bai", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/bigwig/{sample}-{G}.bigwig", sample=SAMPLES, G=["INPUT", "IP"]),
+        expand("results/macs2/{sample}/m6a_peaks.narrowPeak", sample=SAMPLES),
+        expand("results/macs2/{sample}/ok.bed", sample=SAMPLES),
+        expand("results/macs2/{sample}/shuffle.bed", sample=SAMPLES),
+        expand("results/macs2/{sample}/TOTAL/homerResults.html", sample=SAMPLES)
+        
+ 

@@ -1,0 +1,16 @@
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=main
+  - _openmp_mutex=4.5=1_gnu
+  - ca-certificates=2021.10.26=h06a4308_2
+  - homer=4.11=pl5262h7d875b9_5
+  - libgcc-ng=9.3.0=h5101ec6_17
+  - libgomp=9.3.0=h5101ec6_17
+  - libstdcxx-ng=9.3.0=hd4cf53a_17
+  - openssl=1.1.1l=h7f8727e_0
+  - perl=5.26.2=h14c3975_0
+  - unzip=6.0=h611a1e1_0
+  - wget=1.20.1=h20c2e04_0
+  - zlib=1.2.11=h7b6447c_3

@@ -1,0 +1,19 @@
+# path or URL to sample sheet (TSV format, columns: sample, condition, ...)
+samples: config/samples.csv
+
+index: 
+  /home/shpc_93816f5f84/ref/hisat2/genome
+rRNA_index:
+  /home/shpc_93816f5f84/ref/bowtie2/Mus_musculus.rRNA
+chrom_sizes:
+  /home/shpc_93816f5f84/ref/genome/GRCm39.genome.fa.fai
+genome:
+  /home/shpc_93816f5f84/ref/genome/GRCm39.genome.fa
+
+gtf: 
+  /home/shpc_93816f5f84/ref/gtf/gencode.vM28.annotation.gtf.gz
+
+single-transcript-chr:
+  /home/shpc_93816f5f84/projects/TRF-m6A/data/single-transcript-chr
+Locus_tag_mouse:
+  /home/shpc_93816f5f84/projects/TRF-m6A/data/Locus_tag_mouse
